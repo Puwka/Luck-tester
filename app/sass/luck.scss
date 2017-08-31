@@ -1,0 +1,232 @@
+$color : darkgray;
+$pointer-color: rgb(178, 218, 19);
+$lightblue-color: #42b983;
+$default-border: 4px solid $color;
+$height: 200px;
+
+@mixin display-flex {
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+}
+@mixin default-button {
+	background-color: $lightblue-color;
+	border-radius: 12px;
+	outline: none;
+	border: none;
+	color: white;
+	font-size: 24px;
+	line-height: 1.4;
+	border: 2px solid transparent;
+	&:hover {
+		line-height: 1.4;
+		background-color: #fff;
+		border: 2px solid $lightblue-color;
+		color: $lightblue-color;
+	}
+}
+@keyframes sliding {
+	0% {
+		height: 0px;
+	}
+	50% {
+		width: 50px;
+		height: 175px;
+	}
+	100% {
+		width: 40px;
+		height: 150px;
+	}
+}
+html {
+	max-width:1920px;
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.box {
+	width: 60px;
+	height: $height;
+	background: linear-gradient(to top, #fe6600, #ff0000);
+	margin: {
+		top: 200px;
+		left: auto;
+		right: auto;
+	}
+	border: $default-border;
+	position: relative;
+	@include display-flex;
+	z-index: 1;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+.hit {
+	width: 100%;
+	height: $height/6;
+	@include display-flex;
+	background: radial-gradient(40% 50%, #a5f199, #00ff89);
+	position: absolute;
+	top: $height/10;
+	border: {
+		top: $default-border;
+		bottom: $default-border;
+	}
+	z-index: 2;
+}
+.grid {
+	@include display-flex;
+	height: 200px;
+	width: 54%;
+	background-color: #fff;
+	border: 2px solid $lightblue-color;
+	border-radius: 10px;
+	margin: 0 auto;
+	padding: {
+		left: 20px;
+		right: 20px;
+	}
+	align-items: flex-end;
+	box-sizing: border-box;
+	>div {
+		margin-right: 20px;
+		&:last-child {
+			margin-right: 0px;
+		}
+	}
+}
+.record {
+	position: absolute;
+	left: 300px;
+	width: 160px;
+	white-space: nowrap;
+	color: $lightblue-color;
+	font-size: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.score {
+	position: absolute;
+	left: 300px;
+	top: 30px;
+	width: 160px;
+	white-space: nowrap;
+	color: $lightblue-color;
+	font-size: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.level {
+	position: absolute;
+	left: 300px;
+	top: 60px;
+	width: 160px;
+	white-space: nowrap;
+	color: $lightblue-color;
+	font-size: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.rules {
+	position: absolute;
+	right: 280px;
+	width: 260px;
+	color: $lightblue-color;
+	font-size: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.small {
+	@include display-flex;
+	justify-content: center;
+	margin-top: 200px;
+	font-size: 16px;
+	color: $lightblue-color;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.button {
+	justify-content: center;
+	top: 250px;
+	left: -20px;
+	margin: 20px auto;
+	@include display-flex;
+	@include default-button;
+}
+.complete {
+	width: 40px;
+	height: 150px;
+	background: repeating-linear-gradient(45deg, #5fdd5d, #5fdd5d 10px, #2ae320 10px, #2ae320 20px);
+	animation: sliding .5s ease-out;
+}
+.miss {
+	width: 40px;
+	height: 150px;
+	background: repeating-linear-gradient(45deg, #e83922, #e83922 10px, #f61414 10px, #f61414 20px);
+	animation: sliding .5s ease-out;
+}
+#pointer {
+	height: 6px;
+	width:100%;
+	background-color: $pointer-color;
+	border: {
+		top: 2px solid $color;
+		bottom: 2px solid $color;
+	}
+	position: absolute;
+	@include display-flex;
+	z-index: 3;
+}
+.modal-mask {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  transition: opacity .3s ease;
+	overflow: hidden;
+}
+
+.modal-wrapper {
+  display: flex;
+	justify-content: center;
+	align-items: center;;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .7s ease;
+  font-family: Helvetica, Arial, sans-serif;
+	text-align: center;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+.modal-body {
+  margin: 20px 0;
+}
+.modal-default-button {
+	@include default-button;
+}
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
